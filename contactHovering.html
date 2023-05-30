@@ -1,0 +1,34 @@
+<template>
+    <lightning-card  title="contact Hovering Component"> 
+        <lightning-layout multiple-rows="true" vertical-align="end">
+            <lightning-layout-item size="4" padding="around-small">
+                 <!--Input text to Search Account-->
+                <lightning-input type="text" placeholder="Contacts"
+                    value={searchKey} 
+                    onchange={handelSearchKey}>
+                </lightning-input>
+            </lightning-layout-item >
+            <lightning-layout-item size="2" padding="around-small">
+                <!--Search Button-->
+                <lightning-button label="Search" variant="brand" onclick={SearchHandler}>
+                </lightning-button>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small">
+                <!--List Of Contacts Using data table-->
+                <template if:true={contacts}>
+                    <div class="slds-scrollable_y" style="height:200px;width:300px">
+                        <lightning-datatable data={contacts} columns ={cols} key-field="id" value={isChecked} onrowselection={handleRowSelection}>
+                        </lightning-datatable>
+                    </div>
+                </template>
+                <template for:each={selectedRows} for:item="sr">
+                    <div key={sr.Id}>
+                        <div>
+                            <lightning-pill  label={sr.Name}  href={sr.Name} value={sr.Id} onremove={handleRemove} onclick={handleClick}></lightning-pill>
+                        </div>
+                    </div>
+                </template>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>
